@@ -1,0 +1,41 @@
+.glowing-dot {
+  width: 10px;
+  height: 10px;
+  background-color: #EEFF41; /* Yellow */
+  border-radius: 50%;
+  box-shadow: 0 0 10px #EEFF41, 0 0 20px #EEFF41, 0 0 30px #EEFF41;
+}
+
+.city-label {
+  color: white;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 5px 10px;
+  border-radius: 5px;
+  margin-top: 15px;
+  font-family: sans-serif;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.info-card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  z-index: 10;
+}
+
+.info-card h2 {
+  margin-top: 0;
+}
+
+.info-card .close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
