@@ -106,6 +106,7 @@ const GlobeComponent = () => {
           <p>{selectedCity.description}</p>
         </div>
       )}
+      <div className="hero-text">This is Jian He</div>
     </>
   );
 };

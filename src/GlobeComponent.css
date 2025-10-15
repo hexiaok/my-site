@@ -11,11 +11,11 @@
   background-color: rgba(111, 111, 111, 0.6);
   width: 120px;
   height: 42px;
-  border-radius: 6px;
+  border-radius: 8px;
   margin-top: 15px;
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 20px;
-  font-weight: 300;
+  font-family: 'Sora', sans-serif;
+  font-size: 18px;
+  font-weight: 400;
   text-align: center;
   white-space: nowrap;
   display: flex;
@@ -44,4 +44,19 @@
   top: 10px;
   right: 10px;
   cursor: pointer;
+}
+
+.hero-text {
+  position: absolute;
+  top: calc(50% + 250px);
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  font-family: 'Sora', sans-serif;
+  font-size: 115px;
+  font-weight: 600;
+  text-align: center;
+  width: 870px;
+  line-height: normal;
+  z-index: 10;
 }
