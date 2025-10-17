@@ -119,7 +119,10 @@ const GlobeComponent = () => {
       />
       <div className="hero-container">
         <div className="hero-text">This is Jian He</div>
-        <div className="sub-hero-text">a designer, see my works ↓</div>
+        <div className="sub-hero-line">
+          <div className="sub-hero-text">A designer, see my works</div>
+          <div className="down-arrow"></div>
+        </div>
       </div>
     </>
   );
