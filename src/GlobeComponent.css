@@ -15,35 +15,40 @@
   margin-top: 15px;
   font-family: 'Sora', sans-serif;
   font-size: 17px;
-  font-weight: 400;
+  font-weight: 600;
   text-align: center;
   white-space: nowrap;
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.info-card {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: white;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-  z-index: 10;
-}
-
-.info-card h2 {
-  margin-top: 0;
-}
-
-.info-card .close-button {
-  position: absolute;
-  top: 10px;
-  right: 10px;
+  flex-direction: column;
   cursor: pointer;
+}
+
+.city-label.expanded {
+  width: 200px;
+  height: auto;
+  padding: 10px;
+  white-space: normal;
+  align-items: flex-start;
+}
+
+.city-name {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.city-year {
+  font-size: 14px;
+  font-weight: 400;
+  margin-top: 5px;
+}
+
+.city-description {
+  font-size: 12px;
+  font-weight: 300;
+  margin-top: 8px;
+  text-align: left;
 }
 
 .hero-text {
@@ -53,10 +58,10 @@
   transform: translateX(-50%);
   color: white;
   font-family: 'Sora', sans-serif;
-  font-size: 115px;
-  font-weight: 500;
+  font-size: 124px;
+  font-weight: 520;
   text-align: center;
-  width: 870px;
+  width: 100%;
   line-height: normal;
   z-index: 10;
 }
