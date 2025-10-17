@@ -92,14 +92,19 @@ const GlobeComponent = () => {
         htmlElement={d => {
           const el = document.createElement('div');
           if (d.isExpanded) {
-            el.innerHTML = `
+            let labelHtml = `
               <div class="glowing-dot"></div>
               <div class="city-label expanded">
                 <div class="city-name">${d.city}</div>
-                <div class="city-year">${d.year}</div>
+            `;
+            if (d.year) {
+              labelHtml += `<div class="city-year">${d.year}</div>`;
+            }
+            labelHtml += `
                 <div class="city-description">${d.description}</div>
               </div>
             `;
+            el.innerHTML = labelHtml;
           } else {
             el.innerHTML = `<div class="glowing-dot"></div><div class="city-label">${d.name}</div>`;
           }
