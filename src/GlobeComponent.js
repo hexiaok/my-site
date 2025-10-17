@@ -117,7 +117,10 @@ const GlobeComponent = () => {
         }}
         onHtmlElementClick={handleCityClick}
       />
-      <div className="hero-text">This is Jian He</div>
+      <div className="hero-container">
+        <div className="hero-text">This is Jian He</div>
+        <div className="sub-hero-text">a designer, see my works ↓</div>
+      </div>
     </>
   );
 };
