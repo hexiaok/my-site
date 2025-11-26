@@ -1,4 +1,8 @@
-# Globe Interaction
+# my-site
+
+Building personal website 2026
+
+## Globe Interaction
 
 A React application featuring an interactive 3D globe using [react-globe.gl](https://www.npmjs.com/package/react-globe.gl).
 
@@ -38,4 +42,3 @@ Edit `src/components/Globe.jsx` to customize:
 - Rotation speed
 - Add markers, arcs, or other data visualizations
 - Customize colors and textures
-
