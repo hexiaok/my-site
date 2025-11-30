@@ -21,12 +21,9 @@ function GlobeComponent() {
   return (
     <Globe
       ref={globeEl}
-      globeImageUrl="//unpkg.com/three-globe/example/img/earth-blue-marble.jpg"
-      backgroundImageUrl="//unpkg.com/three-globe/example/img/night-sky.png"
+      globeImageUrl="//unpkg.com/three-globe/example/img/earth-topology.png"
       backgroundColor="rgba(0,0,0,0)"
-      showAtmosphere={true}
-      atmosphereColor="#ffffff"
-      atmosphereAltitude={0.15}
+      showAtmosphere={false}
     />
   )
 }
