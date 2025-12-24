@@ -53,7 +53,7 @@
 
 .hero-container {
   position: absolute;
-  top: calc(50% + 250px);
+  bottom: 50px; /* Changed from top */
   left: 50%;
   transform: translateX(-50%);
   text-align: center;
@@ -69,11 +69,23 @@
   line-height: normal;
 }
 
+@media (max-width: 768px) {
+  .hero-text {
+    font-size: clamp(30px, 50vw, 84px);
+    /* Adjust line-height if necessary to ensure it breaks into two lines */
+    line-height: 1.2;
+  }
+}
+
+
 .sub-hero-line {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 16px;
+  cursor: pointer;
+  z-index: 20;
+  position: relative;
 }
 
 .sub-hero-text {
@@ -122,3 +134,11 @@
   }
 }
 
+.scroll-target {
+  height: 100vh;
+  background-color: black;
+}
+
+.nowrap {
+  white-space: nowrap;
+}

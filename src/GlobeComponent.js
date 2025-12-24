@@ -5,6 +5,7 @@ import './GlobeComponent.css';
 const GlobeComponent = () => {
   const [pointsData, setPointsData] = useState([]);
   const globeEl = useRef();
+  const scrollTargetRef = useRef();
 
   useEffect(() => {
     const initialPointsData = [
@@ -80,6 +81,10 @@ const GlobeComponent = () => {
     })));
   };
 
+  const handleSubHeroClick = () => {
+    scrollTargetRef.current.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <>
       <Globe
@@ -118,12 +123,13 @@ const GlobeComponent = () => {
         onHtmlElementClick={handleCityClick}
       />
       <div className="hero-container">
-        <div className="hero-text">This is Jian He</div>
-        <div className="sub-hero-line">
+        <div className="hero-text">This is <span className="nowrap">Jian He</span></div>
+        <div className="sub-hero-line" onClick={handleSubHeroClick}>
           <div className="sub-hero-text">a designer, see my works</div>
           <div className="down-arrow"></div>
         </div>
       </div>
+      <div ref={scrollTargetRef} className="scroll-target"></div>
     </>
   );
 };
