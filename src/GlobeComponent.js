@@ -4,12 +4,8 @@ import './GlobeComponent.css';
 
 const GlobeComponent = () => {
   const [pointsData, setPointsData] = useState([]);
-  const [zurichData, setZurichData] = useState([]);
+  const [isGlobeRotating, setIsGlobeRotating] = useState(true);
   const globeEl1 = useRef();
-  const globeEl2 = useRef();
-  const scrollContainerRef = useRef();
-  const scrollTargetRef = useRef();
-  const [isSecondSectionVisible, setIsSecondSectionVisible] = useState(false);
 
   useEffect(() => {
     const initialPointsData = [
@@ -69,86 +65,38 @@ const GlobeComponent = () => {
       }
     ];
     setPointsData(initialPointsData);
-    setZurichData(initialPointsData.filter(d => d.name === 'Zurich'));
   }, []);
 
   useEffect(() => {
     if (globeEl1.current) {
-      globeEl1.current.controls().autoRotate = true;
+      globeEl1.current.controls().autoRotate = isGlobeRotating;
       globeEl1.current.controls().autoRotateSpeed = 0.2;
     }
-    if (globeEl2.current) {
-      globeEl2.current.controls().autoRotate = false;
-      globeEl2.current.pointOfView({ lat: 47.3769, lng: 8.5417, altitude: 2 });
-    }
-  }, []);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (scrollContainerRef.current) {
-        const { scrollTop, clientHeight, scrollHeight } = scrollContainerRef.current;
-        const scrollTargetTop = scrollTargetRef.current ? scrollTargetRef.current.offsetTop : 0;
-
-        if (scrollTop >= scrollTargetTop - clientHeight / 2) {
-          setIsSecondSectionVisible(true);
-        } else {
-          setIsSecondSectionVisible(false);
-        }
-      }
-    };
-
-    const scrollContainer = scrollContainerRef.current;
-    if (scrollContainer) {
-      scrollContainer.addEventListener('scroll', handleScroll);
-    }
-
-    return () => {
-      if (scrollContainer) {
-        scrollContainer.removeEventListener('scroll', handleScroll);
-      }
-    };
-  }, []);
+  }, [isGlobeRotating]);
 
   const handleCityClick = (clickedCity) => {
+    setIsGlobeRotating(false); // Stop rotation on city click
     setPointsData(pointsData.map(city => ({
       ...city,
       isExpanded: city === clickedCity ? !city.isExpanded : false
     })));
   };
 
-  const handleSubHeroClick = () => {
-    scrollTargetRef.current.scrollIntoView({ behavior: 'smooth' });
-  };
-
   return (
-    <div ref={scrollContainerRef} className="scroll-container">
-      <div className="globe-section">
-        <div className="globe-wrapper">
-          <GlobeInstance
-            globeEl={globeEl1}
-            pointsData={pointsData}
-            handleCityClick={handleCityClick}
-            interactive={true}
-          />
-        </div>
-        <div className="hero-container">
-          <div className="hero-text">This is <span className="nowrap">Jian He</span></div>
-          <div className="sub-hero-line" onClick={handleSubHeroClick}>
-            <div className="sub-hero-text">a designer, see my works</div>
-            <div className="down-arrow"></div>
-          </div>
-        </div>
+    <div className="main-page-layout">
+      <div className="globe-container">
+        <GlobeInstance
+          globeEl={globeEl1}
+          pointsData={pointsData}
+          handleCityClick={handleCityClick}
+          isGlobeRotating={isGlobeRotating}
+        />
       </div>
-
-      <div ref={scrollTargetRef} className="scroll-target">
-        <div className="globe-wrapper globe-wrapper-bottom">
-          <GlobeInstance
-            globeEl={globeEl2}
-            pointsData={zurichData}
-            handleCityClick={handleCityClick}
-            interactive={false}
-          />
-        </div>
+      <div className="hero-section">
+                  <div className="hero-text">
+                    <p className="mb-0">This is </p>
+                    <p>Jian He</p>
+                  </div>        <div className="sub-hero-text">a designer</div>
       </div>
     </div>
   );

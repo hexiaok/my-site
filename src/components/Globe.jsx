@@ -1,15 +1,17 @@
 import React, { useEffect } from 'react';
 import Globe from 'react-globe.gl';
 
-const GlobeInstance = React.forwardRef(({ globeEl, pointsData, handleCityClick, interactive }, ref) => {
+const GlobeInstance = React.forwardRef(({ globeEl, pointsData, handleCityClick, isGlobeRotating }, ref) => {
 
   useEffect(() => {
     if (globeEl.current) {
-      globeEl.current.controls().enableZoom = interactive;
-      globeEl.current.controls().enableRotate = interactive;
-      globeEl.current.controls().enablePan = interactive;
+      globeEl.current.controls().enableZoom = true;
+      globeEl.current.controls().enableRotate = true;
+      globeEl.current.controls().enablePan = true;
+      globeEl.current.controls().autoRotate = isGlobeRotating;
+      globeEl.current.controls().autoRotateSpeed = 0.2;
     }
-  }, [globeEl, interactive]);
+  }, [globeEl, isGlobeRotating]);
 
   return (
     <Globe

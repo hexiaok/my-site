@@ -51,123 +51,99 @@
   text-align: left;
 }
 
-.scroll-container {
-  height: 100vh;
-  overflow-y: auto;
-}
-
-.globe-section {
+.main-page-layout {
   position: relative;
+  width: 100vw;
   height: 100vh;
-  scroll-snap-align: start;
+  background-color: black;
+  overflow: hidden; /* Ensure content outside is hidden */
 }
 
-.hero-container {
+.globe-container {
   position: absolute;
-  bottom: 50px;
-  left: 50%;
-  transform: translateX(-50%);
-  text-align: center;
-  width: 100%;
-  z-index: 10;
+  top: 0;
+  left: 50vw; /* Position to the right half */
+  width: 50vw; /* Occupy half the screen width */
+  height: 100vh; /* Occupy full screen height */
+  z-index: 1; /* Globe is behind text */
+  display: flex; /* Add flexbox for centering */
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  transform: scale(1.15); /* Make the globe 15% bigger */
+  transform-origin: center center; /* Ensure scaling is from the center */
+}
+
+.hero-section {
+  position: absolute;
+  left: 80px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2; /* Text is in front of globe */
 }
 
 .hero-text {
-  color: white;
   font-family: 'Sora', sans-serif;
-  font-size: 124px;
-  font-weight: 520;
+  font-size: 136px;
+  font-weight: 700; /* Bold */
+  color: white;
   line-height: normal;
+  white-space: pre-wrap; /* Preserve wrap for "This is Jian He" */
 }
 
-@media (max-width: 768px) {
-  .hero-text {
-    font-size: clamp(30px, 50vw, 84px);
-    line-height: 1.2;
-  }
-}
-
-.sub-hero-line {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 16px;
-  cursor: pointer;
-  z-index: 20;
-  position: relative;
+.hero-text p {
+  margin: 0; /* Remove default paragraph margins */
 }
 
 .sub-hero-text {
+  font-family: 'Sora', sans-serif;
+  font-size: 48px;
+  font-weight: 400; /* SemiBold */
   color: white;
-  font-size: 19px;
-  font-family: 'Sora';
-  font-weight: 400;
-  word-wrap: break-word;
-  margin-top: 32px;
+  line-height: normal;
+  white-space: pre-wrap;
+  margin-top: 20px; /* Adjust spacing as needed */
 }
 
-.down-arrow {
-  position: relative;
-  top: 10px;
-  width: 0;
-  height: 16px;
-  border: 1px solid;
-  border-radius: 1px;
-  animation: jumpInfinite 0.9s infinite;
-  color: white;
-}
-
-.down-arrow:after {
-  content: " ";
-  position: absolute;
-  top: 6px;
-  left: -5px;
-  width: 8px;
-  height: 8px;
-  border-bottom: 2px solid;
-  border-right: 2px solid;
-  border-radius: 2px;
-  transform: rotateZ(45deg);
-}
-
-@keyframes jumpInfinite {
-  0% {
-    margin-top: 0;
+@media (max-width: 768px) {
+  .main-page-layout {
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto; /* Allow scrolling on mobile */
   }
-  50% {
-    margin-top: 10px;
-  }
-  100% {
-    margin-top: 0;
-  }
-}
 
-.scroll-target {
-  position: relative; /* Added */
-  height: 100vh;
-  background-color: black;
-  scroll-snap-align: start;
+  .globe-container {
+    position: relative; /* Change to relative for flow */
+    width: 100vw; /* Full width */
+    height: 50vh; /* Top half of the screen */
+    left: 0;
+    top: 0;
+    transform: scale(1); /* Reset scale for mobile */
+  }
+
+  .hero-section {
+    position: relative; /* Change to relative for flow */
+    left: 0;
+    top: 0;
+    transform: none; /* Remove transform */
+    width: 100%;
+    padding: 20px; /* Add some padding */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .hero-text {
+    font-size: 84px; /* Adjust font size for mobile */
+  }
+
+  .sub-hero-text {
+    font-size: 32px; /* Adjust font size for mobile */
+    margin-top: 10px; /* Adjust spacing */
+  }
 }
 
 .nowrap {
   white-space: nowrap;
-}
-
-.globe-wrapper {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  z-index: 1;
-}
-
-.globe-wrapper-bottom {
-  position: absolute; /* Changed from fixed to absolute */
-  bottom: 0; /* Align to the bottom of its parent */
-  left: -45%; /* Shift left by 40% of its own width */
-  width: 100%; /* Take full width of parent */
-  height: 100%; /* Take full height of parent */
-  overflow: hidden; /* Hide the left half */
-  z-index: 10;
 }
