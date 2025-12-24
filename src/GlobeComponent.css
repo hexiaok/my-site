@@ -25,14 +25,6 @@
   cursor: pointer;
 }
 
-.city-label.expanded {
-  width: 200px;
-  height: auto;
-  padding: 10px;
-  white-space: normal;
-  align-items: flex-start;
-}
-
 .city-name {
   font-size: 17px;
   font-weight: 600;
@@ -79,6 +71,12 @@
   top: 50%;
   transform: translateY(-50%);
   z-index: 2; /* Text is in front of globe */
+  transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+}
+
+.hero-section.fade-out {
+  opacity: 0;
+  visibility: hidden;
 }
 
 .hero-text {
@@ -94,14 +92,33 @@
   margin: 0; /* Remove default paragraph margins */
 }
 
-.sub-hero-text {
-  font-family: 'Sora', sans-serif;
-  font-size: 48px;
-  font-weight: 400; /* SemiBold */
+.city-details-section {
+  position: absolute;
+  left: 80px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2; /* In front of globe */
+  width: calc(50% - 80px); /* Occupy left half, adjusted for left padding */
   color: white;
-  line-height: normal;
-  white-space: pre-wrap;
-  margin-top: 20px; /* Adjust spacing as needed */
+  font-family: 'Sora', sans-serif;
+}
+
+.city-details-title {
+  font-size: 48px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.city-details-subtitle {
+  font-size: 32px;
+  font-weight: 400;
+  margin-bottom: 20px;
+}
+
+.city-details-description {
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 1.5;
 }
 
 @media (max-width: 768px) {
@@ -136,11 +153,6 @@
 
   .hero-text {
     font-size: 84px; /* Adjust font size for mobile */
-  }
-
-  .sub-hero-text {
-    font-size: 32px; /* Adjust font size for mobile */
-    margin-top: 10px; /* Adjust spacing */
   }
 }
 

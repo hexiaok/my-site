@@ -5,7 +5,11 @@ import './GlobeComponent.css';
 const GlobeComponent = () => {
   const [pointsData, setPointsData] = useState([]);
   const [isGlobeRotating, setIsGlobeRotating] = useState(true);
+  const [isHeroTextVisible, setIsHeroTextVisible] = useState(true);
+  const [showCityDetails, setShowCityDetails] = useState(false);
+  const [selectedCity, setSelectedCity] = useState(null);
   const globeEl1 = useRef();
+  const cityDetailsRef = useRef();
 
   useEffect(() => {
     const initialPointsData = [
@@ -76,14 +80,31 @@ const GlobeComponent = () => {
 
   const handleCityClick = (clickedCity) => {
     setIsGlobeRotating(false); // Stop rotation on city click
-    setPointsData(pointsData.map(city => ({
-      ...city,
-      isExpanded: city === clickedCity ? !city.isExpanded : false
-    })));
+    setIsHeroTextVisible(false); // Hide hero text on city click
+    setShowCityDetails(true); // Show city details
+    setSelectedCity(clickedCity); // Store selected city details
+    // setPointsData(pointsData.map(city => ({ // Removed expansion logic
+    //   ...city,
+    //   isExpanded: city === clickedCity ? !city.isExpanded : false
+    // })));
+  };
+
+  const handlePageClick = (event) => {
+    // Check if the click was on a city label or inside the city details section
+    const isCityLabelClick = event.target.closest('.city-label');
+    const isCityDetailsClick = cityDetailsRef.current && cityDetailsRef.current.contains(event.target);
+
+    if (!isCityLabelClick && !isCityDetailsClick) {
+      setIsHeroTextVisible(true);
+      setIsGlobeRotating(true);
+      setShowCityDetails(false);
+      setSelectedCity(null);
+      setPointsData(pointsData.map(city => ({ ...city, isExpanded: false })));
+    }
   };
 
   return (
-    <div className="main-page-layout">
+    <div className="main-page-layout" onClick={handlePageClick}>
       <div className="globe-container">
         <GlobeInstance
           globeEl={globeEl1}
@@ -92,12 +113,20 @@ const GlobeComponent = () => {
           isGlobeRotating={isGlobeRotating}
         />
       </div>
-      <div className="hero-section">
+      <div className={`hero-section ${isHeroTextVisible ? '' : 'fade-out'}`}>
                   <div className="hero-text">
                     <p className="mb-0">This is </p>
                     <p>Jian He</p>
-                  </div>        <div className="sub-hero-text">a designer</div>
-      </div>
+                  </div>      </div>
+      {showCityDetails && selectedCity && (
+        <div ref={cityDetailsRef} className="city-details-section">
+          <div className="city-details-title">{selectedCity.year}</div>
+          <div className="city-details-subtitle">{selectedCity.description}</div>
+          <div className="city-details-description">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut iaculis tellus non consequat porta. Integer vehicula vehicula tortor non euismod. Donec vestibulum orci dictum augue vehicula, et aliquam justo malesuada.
+          </div>
+        </div>
+      )}
     </div>
   );
 };
