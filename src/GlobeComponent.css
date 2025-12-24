@@ -49,10 +49,13 @@
   height: 100vh;
   background-color: black;
   overflow: hidden; /* Ensure content outside is hidden */
+  display: flex; /* Use flexbox for desktop layout */
+  align-items: center; /* Center vertically */
+  justify-content: flex-start; /* Align content to start */
 }
 
 .globe-container {
-  position: absolute;
+  position: absolute; /* Keep absolute for precise positioning relative to layout */
   top: 0;
   left: 50vw; /* Position to the right half */
   width: 50vw; /* Occupy half the screen width */
@@ -66,12 +69,14 @@
 }
 
 .hero-section {
-  position: absolute;
-  left: 80px;
-  top: 50%;
-  transform: translateY(-50%);
+  position: relative; /* Change to relative within flex container */
+  left: 0;
+  top: 0;
+  transform: none; /* Remove transform as flexbox handles centering */
   z-index: 2; /* Text is in front of globe */
   transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+  width: 60vw; /* Occupy 60% of the whole screen width */
+  padding-left: 80px; /* Original left padding */
 }
 
 .hero-section.fade-out {
@@ -81,7 +86,7 @@
 
 .hero-text {
   font-family: 'Sora', sans-serif;
-  font-size: 136px;
+  font-size: clamp(50px, 14vw, 200px); /* Responsive font size for 60vw width */
   font-weight: 700; /* Bold */
   color: white;
   line-height: normal;
@@ -98,7 +103,7 @@
   top: 50%;
   transform: translateY(-50%);
   z-index: 2; /* In front of globe */
-  width: calc(50% - 80px); /* Occupy left half, adjusted for left padding */
+  width: calc(60vw - 80px); /* Occupy left 60%, adjusted for left padding */
   color: white;
   font-family: 'Sora', sans-serif;
 }
@@ -152,7 +157,8 @@
   }
 
   .hero-text {
-    font-size: 84px; /* Adjust font size for mobile */
+    font-size: clamp(30px, 75vw, 60px); /* Adjusted clamp for better wrapping */
+    text-align: center; /* Center align text */
   }
 }
 
