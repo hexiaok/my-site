@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
-import Globe from 'react-globe.gl';
+import GlobeInstance from './components/Globe.jsx';
 import './GlobeComponent.css';
 
 const GlobeComponent = () => {
   const [pointsData, setPointsData] = useState([]);
-  const globeEl = useRef();
+  const globeEl1 = useRef();
+  const globeEl2 = useRef();
+  const scrollContainerRef = useRef();
   const scrollTargetRef = useRef();
 
   useEffect(() => {
@@ -68,9 +70,13 @@ const GlobeComponent = () => {
   }, []);
 
   useEffect(() => {
-    if (globeEl.current) {
-      globeEl.current.controls().autoRotate = true;
-      globeEl.current.controls().autoRotateSpeed = 0.2;
+    if (globeEl1.current) {
+      globeEl1.current.controls().autoRotate = true;
+      globeEl1.current.controls().autoRotateSpeed = 0.2;
+    }
+    if (globeEl2.current) {
+      globeEl2.current.controls().autoRotate = true;
+      globeEl2.current.controls().autoRotateSpeed = 0.2;
     }
   }, []);
 
@@ -86,52 +92,36 @@ const GlobeComponent = () => {
   };
 
   return (
-    <>
-      <Globe
-        ref={globeEl}
-        globeImageUrl="//unpkg.com/three-globe/example/img/earth-topology.png"
-        backgroundColor="rgba(0,0,0,0)"
-        atmosphereColor="rgba(255, 255, 255, 0.21)"
-        showAtmosphere={true}
-        htmlElementsData={pointsData}
-        htmlElement={d => {
-          const el = document.createElement('div');
-          if (d.isExpanded) {
-            let labelHtml = `
-              <div class="glowing-dot"></div>
-              <div class="city-label expanded">
-                <div class="city-name">${d.city}</div>
-            `;
-            if (d.year) {
-              labelHtml += `<div class="city-year">${d.year}</div>`;
-            }
-            labelHtml += `
-                <div class="city-description">${d.description}</div>
-              </div>
-            `;
-            el.innerHTML = labelHtml;
-          } else {
-            el.innerHTML = `<div class="glowing-dot"></div><div class="city-label">${d.name}</div>`;
-          }
-          el.style.color = d.color;
-          el.style.width = `${d.size}px`;
-          el.style.pointerEvents = 'auto';
-          el.style.cursor = 'pointer';
-          el.onclick = () => handleCityClick(d);
-          return el;
-        }}
-        onHtmlElementClick={handleCityClick}
-      />
-      <div className="hero-container">
-        <div className="hero-text">This is <span className="nowrap">Jian He</span></div>
-        <div className="sub-hero-line" onClick={handleSubHeroClick}>
-          <div className="sub-hero-text">a designer, see my works</div>
-          <div className="down-arrow"></div>
+    <div ref={scrollContainerRef} className="scroll-container">
+      <div className="globe-section">
+        <div className="globe-wrapper">
+          <GlobeInstance
+            globeEl={globeEl1}
+            pointsData={pointsData}
+            handleCityClick={handleCityClick}
+          />
+        </div>
+        <div className="hero-container">
+          <div className="hero-text">This is <span className="nowrap">Jian He</span></div>
+          <div className="sub-hero-line" onClick={handleSubHeroClick}>
+            <div className="sub-hero-text">a designer, see my works</div>
+            <div className="down-arrow"></div>
+          </div>
         </div>
       </div>
-      <div ref={scrollTargetRef} className="scroll-target"></div>
-    </>
+
+      <div ref={scrollTargetRef} className="scroll-target">
+        <div className="globe-wrapper">
+          <GlobeInstance
+            globeEl={globeEl2}
+            pointsData={pointsData}
+            handleCityClick={handleCityClick}
+          />
+        </div>
+      </div>
+    </div>
   );
 };
 
 export default GlobeComponent;
+
