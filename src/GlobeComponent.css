@@ -54,7 +54,6 @@
 .scroll-container {
   height: 100vh;
   overflow-y: auto;
-  scroll-snap-type: y mandatory;
 }
 
 .globe-section {
@@ -161,4 +160,14 @@
   top: 0;
   left: 0;
   z-index: 1;
+}
+
+.globe-wrapper-bottom {
+  position: absolute; /* Changed from fixed to absolute */
+  bottom: 0; /* Align to the bottom of its parent */
+  left: -45%; /* Shift left by 40% of its own width */
+  width: 100%; /* Take full width of parent */
+  height: 100%; /* Take full height of parent */
+  overflow: hidden; /* Hide the left half */
+  z-index: 10;
 }

@@ -4,10 +4,12 @@ import './GlobeComponent.css';
 
 const GlobeComponent = () => {
   const [pointsData, setPointsData] = useState([]);
+  const [zurichData, setZurichData] = useState([]);
   const globeEl1 = useRef();
   const globeEl2 = useRef();
   const scrollContainerRef = useRef();
   const scrollTargetRef = useRef();
+  const [isSecondSectionVisible, setIsSecondSectionVisible] = useState(false);
 
   useEffect(() => {
     const initialPointsData = [
@@ -67,6 +69,7 @@ const GlobeComponent = () => {
       }
     ];
     setPointsData(initialPointsData);
+    setZurichData(initialPointsData.filter(d => d.name === 'Zurich'));
   }, []);
 
   useEffect(() => {
@@ -75,9 +78,35 @@ const GlobeComponent = () => {
       globeEl1.current.controls().autoRotateSpeed = 0.2;
     }
     if (globeEl2.current) {
-      globeEl2.current.controls().autoRotate = true;
-      globeEl2.current.controls().autoRotateSpeed = 0.2;
+      globeEl2.current.controls().autoRotate = false;
+      globeEl2.current.pointOfView({ lat: 47.3769, lng: 8.5417, altitude: 2 });
     }
+  }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (scrollContainerRef.current) {
+        const { scrollTop, clientHeight, scrollHeight } = scrollContainerRef.current;
+        const scrollTargetTop = scrollTargetRef.current ? scrollTargetRef.current.offsetTop : 0;
+
+        if (scrollTop >= scrollTargetTop - clientHeight / 2) {
+          setIsSecondSectionVisible(true);
+        } else {
+          setIsSecondSectionVisible(false);
+        }
+      }
+    };
+
+    const scrollContainer = scrollContainerRef.current;
+    if (scrollContainer) {
+      scrollContainer.addEventListener('scroll', handleScroll);
+    }
+
+    return () => {
+      if (scrollContainer) {
+        scrollContainer.removeEventListener('scroll', handleScroll);
+      }
+    };
   }, []);
 
   const handleCityClick = (clickedCity) => {
@@ -99,6 +128,7 @@ const GlobeComponent = () => {
             globeEl={globeEl1}
             pointsData={pointsData}
             handleCityClick={handleCityClick}
+            interactive={true}
           />
         </div>
         <div className="hero-container">
@@ -111,11 +141,12 @@ const GlobeComponent = () => {
       </div>
 
       <div ref={scrollTargetRef} className="scroll-target">
-        <div className="globe-wrapper">
+        <div className="globe-wrapper globe-wrapper-bottom">
           <GlobeInstance
             globeEl={globeEl2}
-            pointsData={pointsData}
+            pointsData={zurichData}
             handleCityClick={handleCityClick}
+            interactive={false}
           />
         </div>
       </div>
