@@ -16,7 +16,7 @@ const GlobeComponent = () => {
         city: 'Zurich',
         country: 'Switzerland',
         year: '2021-now',
-        description: 'A designer @Google',
+        description: 'a designer @Google',
         isExpanded: false
       },
       {
@@ -27,7 +27,7 @@ const GlobeComponent = () => {
         city: 'Cambridge',
         country: 'USA',
         year: '2011-2015',
-        description: 'A student & researcher @GSD',
+        description: 'a researcher @GSD',
         isExpanded: false
       },
       {
@@ -48,7 +48,7 @@ const GlobeComponent = () => {
         city: 'Berlin',
         country: 'Germany',
         year: '2019-2021',
-        description: 'A designer @DH',
+        description: 'a designer @DH',
         isExpanded: false
       },
       {
@@ -59,7 +59,7 @@ const GlobeComponent = () => {
         city: 'Singapore',
         country: 'Singapore',
         year: '2015-2019',
-        description: 'A designer @Grab',
+        description: 'a designer @Grab',
         isExpanded: false
       }
     ];
@@ -120,7 +120,7 @@ const GlobeComponent = () => {
       <div className="hero-container">
         <div className="hero-text">This is Jian He</div>
         <div className="sub-hero-line">
-          <div className="sub-hero-text">A designer, see my works</div>
+          <div className="sub-hero-text">a designer, see my works</div>
           <div className="down-arrow"></div>
         </div>
       </div>
