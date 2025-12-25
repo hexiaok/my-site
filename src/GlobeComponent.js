@@ -114,10 +114,11 @@ const GlobeComponent = () => {
         />
       </div>
       <div className={`hero-section ${isHeroTextVisible ? '' : 'fade-out'}`}>
-                  <div className="hero-text">
-                    <p className="mb-0 nowrap">This is </p>
-                    <p className="nowrap">Jian He</p>
-                  </div>      </div>
+                  <div className={`hero-text ${isHeroTextVisible ? 'animate-in' : ''}`}>
+                    <span>This</span>&nbsp;<span>is</span><br />
+                    <span>Jian</span>&nbsp;<span>He</span>
+                  </div>
+      </div>
       {showCityDetails && selectedCity && (
         <div ref={cityDetailsRef} className="city-details-section">
           <div className="city-details-title">{selectedCity.year}</div>
