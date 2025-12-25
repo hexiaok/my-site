@@ -42,7 +42,7 @@ const GlobeComponent = () => {
         name: 'Ningbo',
         city: 'Ningbo',
         country: 'China',
-        description: 'Just a kid',
+        year: 'Just a kid',
         isExpanded: false
       },
       {
@@ -115,8 +115,8 @@ const GlobeComponent = () => {
       </div>
       <div className={`hero-section ${isHeroTextVisible ? '' : 'fade-out'}`}>
                   <div className="hero-text">
-                    <p className="mb-0">This is </p>
-                    <p>Jian He</p>
+                    <p className="mb-0 nowrap">This is </p>
+                    <p className="nowrap">Jian He</p>
                   </div>      </div>
       {showCityDetails && selectedCity && (
         <div ref={cityDetailsRef} className="city-details-section">
