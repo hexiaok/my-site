@@ -14,8 +14,8 @@
   border-radius: 8px;
   margin-top: 15px;
   font-family: 'Sora', sans-serif;
-  font-size: 17px;
-  font-weight: 600;
+  font-size: 15px;
+  font-weight: 300;
   text-align: center;
   white-space: nowrap;
   display: flex;
@@ -176,8 +176,8 @@
     height: 70vh; /* Top half of the screen */
     left: 0;
     top: 0;
-    transform: scale(0.8); /* Reset scale for mobile */
-    padding-top: 15px;
+    transform: scale(1); /* Reset scale for mobile */
+    padding-top: 20px;
   }
 
   .hero-section {
@@ -237,3 +237,4 @@
 .nowrap {
   white-space: nowrap;
 }
+
