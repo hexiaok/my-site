@@ -2,20 +2,19 @@ This document provides context for the Gemini CLI to understand the project.
 
 ### Project Overview
 
-This is a React application that displays a 3D globe using the `react-globe.gl` library. The application is set up to be built with `react-scripts` (Create React App) and also has a `vite.config.js` file. It's designed to be deployed to GitHub Pages.
+This is a React application that displays a 3D globe using the `react-globe.gl` library. The application is set up to be built with `react-scripts` (Create React App).
 
 ### Key Technologies
 
 *   **React:** The core frontend framework.
 *   **react-globe.gl:** For rendering the interactive 3D globe.
 *   **three.js:** A dependency of `react-globe.gl` for 3D graphics.
-*   **Vite:** A build tool configured for the project.
 *   **gh-pages:** For deploying the `build` folder to a `gh-pages` branch.
 
 ### Project Structure
 
 *   `public/index.html`: Main HTML template.
-*   `src/main.jsx`: The entry point for the React application when using Vite.
+*   `src/main.jsx`: The entry point for the React application.
 *   `src/App.jsx`: The main application component that renders the globe.
 *   `src/components/Globe.jsx`: The component that encapsulates the `react-globe.gl` functionality. It displays points on the globe and handles user interaction.
 *   `create_embeddable_html.js`: A Node.js script that likely bundles the application into a single HTML file for embedding elsewhere.
