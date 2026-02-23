@@ -1,7 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+
 .glowing-dot {
   width: 10px;
   height: 10px;
-  background-color: #EEFF41; /* Yellow */
+  background-color: #EEFF41;
+  /* Yellow */
   border-radius: 50%;
   box-shadow: 0 0 10px #EEFF41, 0 0 20px #EEFF41, 0 0 30px #EEFF41;
 }
@@ -48,35 +51,54 @@
   width: 100vw;
   height: 100vh;
   background-color: black;
-  overflow: hidden; /* Ensure content outside is hidden */
-  display: flex; /* Use flexbox for desktop layout */
-  align-items: center; /* Center vertically */
-  justify-content: flex-start; /* Align content to start */
+  overflow: hidden;
+  /* Ensure content outside is hidden */
+  display: flex;
+  /* Use flexbox for desktop layout */
+  align-items: center;
+  /* Center vertically */
+  justify-content: flex-start;
+  /* Align content to start */
 }
 
 .globe-container {
-  position: absolute; /* Keep absolute for precise positioning relative to layout */
+  position: absolute;
+  /* Keep absolute for precise positioning relative to layout */
   top: 0;
-  left: 50vw; /* Position to the right half */
-  width: 50vw; /* Occupy half the screen width */
-  height: 100vh; /* Occupy full screen height */
-  z-index: 1; /* Globe is behind text */
-  display: flex; /* Add flexbox for centering */
-  justify-content: center; /* Center horizontally */
-  align-items: center; /* Center vertically */
-  transform: scale(1.25); /* Make the globe 25% bigger */
-  transform-origin: center center; /* Ensure scaling is from the center */
+  left: 50vw;
+  /* Position to the right half */
+  width: 50vw;
+  /* Occupy half the screen width */
+  height: 100vh;
+  /* Occupy full screen height */
+  z-index: 1;
+  /* Globe is behind text */
+  display: flex;
+  /* Add flexbox for centering */
+  justify-content: center;
+  /* Center horizontally */
+  align-items: center;
+  /* Center vertically */
+  transform: scale(1.25);
+  /* Make the globe 25% bigger */
+  transform-origin: center center;
+  /* Ensure scaling is from the center */
 }
 
 .hero-section {
-  position: relative; /* Change to relative within flex container */
+  position: relative;
+  /* Change to relative within flex container */
   left: 0;
   top: 0;
-  transform: none; /* Remove transform as flexbox handles centering */
-  z-index: 2; /* Text is in front of globe */
+  transform: none;
+  /* Remove transform as flexbox handles centering */
+  z-index: 2;
+  /* Text is in front of globe */
   transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
-  width: 60vw; /* Occupy 60% of the whole screen width */
-  padding-left: 80px; /* Original left padding */
+  width: 60vw;
+  /* Occupy 60% of the whole screen width */
+  padding-left: 80px;
+  /* Original left padding */
 }
 
 .hero-section.fade-out {
@@ -86,16 +108,20 @@
 
 .hero-text {
   font-family: 'Sora', sans-serif;
-  font-size: clamp(20px, 16vw, 180px); /* Responsive font size for 60vw width */
-  font-weight: 600; /* Bold */
+  font-size: clamp(20px, 16vw, 180px);
+  /* Responsive font size for 60vw width */
+  font-weight: 600;
+  /* Bold */
   color: white;
   line-height: 1;
-  white-space: pre-wrap; /* Preserve wrap for "This is Jian He" */
+  white-space: pre-wrap;
+  /* Preserve wrap for "This is Jian He" */
   overflow: show;
 }
 
 .hero-text p {
-  margin: 0px; /* Remove default paragraph margins */
+  margin: 0px;
+  /* Remove default paragraph margins */
 }
 
 @keyframes fadeIn {
@@ -103,6 +129,7 @@
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -136,8 +163,10 @@
   left: 80px;
   top: 50%;
   transform: translateY(-50%);
-  z-index: 2; /* In front of globe */
-  width: calc(50vw - 80px); /* Occupy left 50%, adjusted for left padding */
+  z-index: 2;
+  /* In front of globe */
+  width: calc(50vw - 80px);
+  /* Occupy left 50%, adjusted for left padding */
   color: white;
   font-family: 'Sora', sans-serif;
 }
@@ -149,14 +178,16 @@
 }
 
 .city-details-subtitle {
+  font-family: 'DM Sans', sans-serif;
   font-size: 21px;
   font-weight: 400;
   margin-bottom: 20px;
 }
 
 .city-details-description {
+  font-family: 'DM Sans', sans-serif;
   font-size: 16px;
-  font-weight: 300;
+  font-weight: 400;
   line-height: 1.5;
   white-space: pre-wrap;
 }
@@ -165,41 +196,51 @@
   .main-page-layout {
     display: flex;
     flex-direction: column;
-    overflow: hidden; /* Ensure no scrolling on mobile */
+    overflow: hidden;
+    /* Ensure no scrolling on mobile */
     height: 100vh;
   }
 
-/* mobile */
+  /* mobile */
   .globe-container {
-    position: relative; /* Change to relative for flow */
-    width: 100vw; /* Full width */
-    height: 70vh; /* Top half of the screen */
+    position: relative;
+    /* Change to relative for flow */
+    width: 100vw;
+    /* Full width */
+    height: 70vh;
+    /* Top half of the screen */
     left: 0;
     top: 0;
-    transform: scale(1); /* Reset scale for mobile */
+    transform: scale(1);
+    /* Reset scale for mobile */
     padding-top: 20px;
   }
 
   .hero-section {
-    position: relative; /* Change to relative for flow */
+    position: relative;
+    /* Change to relative for flow */
     left: 0;
     top: 0;
-    transform: none; /* Remove transform */
+    transform: none;
+    /* Remove transform */
     width: 100%;
-    padding:24px; /* Add some padding */
+    padding: 24px;
+    /* Add some padding */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-end;
     text-align: center;
     flex-grow: 1;
-    padding-bottom: 100px; 
+    padding-bottom: 100px;
   }
 
   /* mobile */
   .hero-text {
-    font-size: clamp(30px, 20vw, 200px); /* Adjusted clamp for better wrapping */
-    text-align: center; /* Center align text */
+    font-size: clamp(30px, 20vw, 200px);
+    /* Adjusted clamp for better wrapping */
+    text-align: center;
+    /* Center align text */
     width: 90vw;
   }
 
@@ -237,4 +278,3 @@
 .nowrap {
   white-space: nowrap;
 }
-
