@@ -192,6 +192,11 @@
   white-space: pre-wrap;
 }
 
+.city-details-attribution {
+  text-align: left;
+  margin-top: 16px;
+}
+
 @media (max-width: 768px) {
   .main-page-layout {
     display: flex;
@@ -277,4 +282,13 @@
 
 .nowrap {
   white-space: nowrap;
+}
+/* Keyboard focus on city pins */
+.city-pin {
+  outline: none;
+}
+
+.city-pin:focus-visible .city-label {
+  outline: 2px solid #EEFF41;
+  outline-offset: 2px;
 }

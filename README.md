@@ -1,70 +1,50 @@
-# Getting Started with Create React App
+# This is Jian He
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A personal portfolio site built around an interactive 3D globe. Each
+city pin marks a stop in Jian He's career/journey; clicking one flies
+the camera in and shows the story for that stop.
 
-## Available Scripts
+## Stack
 
-In the project directory, you can run:
+- [Create React App](https://create-react-app.dev/) (`react-scripts`)
+- [react-globe.gl](https://github.com/vasturiano/react-globe.gl) + [three.js](https://threejs.org/) for the 3D globe
+- Deployed to GitHub Pages via [gh-pages](https://github.com/tschaub/gh-pages)
 
-### `npm start`
+## Project structure
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+```
+public/index.html       CRA HTML template
+src/index.js             React entry point
+src/App.js                Top-level app shell
+src/GlobeComponent.js      Page logic: city data, camera moves, hero text, city detail panel
+src/GlobeComponent.css     Styles for the above
+src/components/Globe.jsx   Thin wrapper around the react-globe.gl <Globe> instance
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Getting started
 
-### `npm test`
+```bash
+npm install
+npm start
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Opens the dev server at [http://localhost:3000](http://localhost:3000) with hot reload.
 
-### `npm run build`
+## Scripts
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- `npm start` — run the dev server
+- `npm run build` — production build to `build/`
+- `npm test` — run tests (`react-scripts test`)
+- `npm run deploy` — build and publish `build/` to the `gh-pages` branch
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Embeddable version
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+`create_embeddable_html.js` bundles a production build into a single
+self-contained `embedded_globe.html` file (CSS/JS inlined), for
+dropping the globe into another page (e.g. a Notion embed). Regenerate
+it after a `npm run build`:
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```bash
+npm run build
+node create_embeddable_html.js
+```

@@ -1,8 +1,19 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import GlobeInstance from './components/Globe.jsx';
 import './GlobeComponent.css';
 
+// Camera distance: overview vs. focused on a city.
+const ALTITUDE_OVERVIEW = 2.5;
+const ALTITUDE_FOCUS = 1.6;
+const FLY_DURATION_MS = 1200;
+
+const prefersReducedMotion = () =>
+  typeof window !== 'undefined' &&
+  window.matchMedia &&
+  window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
 const GlobeComponent = () => {
+  const [reducedMotion] = useState(prefersReducedMotion);
   const [pointsData, setPointsData] = useState([]);
   const [isGlobeRotating, setIsGlobeRotating] = useState(true);
   const [isHeroTextVisible, setIsHeroTextVisible] = useState(true);
@@ -47,8 +58,8 @@ const GlobeComponent = () => {
         year: 'Just a kid',
         // 'description-short': 'Just a kid',
         'description-long': `"Oh, take their picture," said the woman to her bemused husband, "I think they're artists."
-"oh, go on," he shrugged. "They're just kids."
- -- Patti Smith "Just Kids"`,
+"oh, go on," he shrugged. "They're just kids."`,
+        'description-attribution': '-- Patti Smith <Just Kids>',
         isExpanded: false
       },
       {
@@ -83,35 +94,51 @@ Moving to MING Labs, a bespoke design agency, I navigated a diverse landscape ra
 
   useEffect(() => {
     if (globeEl1.current) {
-      globeEl1.current.controls().autoRotate = isGlobeRotating;
+      globeEl1.current.controls().autoRotate = isGlobeRotating && !reducedMotion;
       globeEl1.current.controls().autoRotateSpeed = 0.2;
     }
-  }, [isGlobeRotating]);
+  }, [isGlobeRotating, reducedMotion]);
+
+  const flyTo = useCallback((pov) => {
+    if (globeEl1.current) {
+      globeEl1.current.pointOfView(pov, reducedMotion ? 0 : FLY_DURATION_MS);
+    }
+  }, [reducedMotion]);
 
   const handleCityClick = (clickedCity) => {
     setIsGlobeRotating(false); // Stop rotation on city click
     setIsHeroTextVisible(false); // Hide hero text on city click
     setShowCityDetails(true); // Show city details
     setSelectedCity(clickedCity); // Store selected city details
-    // setPointsData(pointsData.map(city => ({ // Removed expansion logic
-    //   ...city,
-    //   isExpanded: city === clickedCity ? !city.isExpanded : false
-    // })));
+    flyTo({ lat: clickedCity.lat, lng: clickedCity.lng, altitude: ALTITUDE_FOCUS });
   };
+
+  const resetView = useCallback(() => {
+    setIsHeroTextVisible(true);
+    setIsGlobeRotating(true);
+    setShowCityDetails(false);
+    setSelectedCity(null);
+    flyTo({ altitude: ALTITUDE_OVERVIEW });
+  }, [flyTo]);
 
   const handlePageClick = (event) => {
-    // Check if the click was on a city label or inside the city details section
-    const isCityLabelClick = event.target.closest('.city-label');
+    // Ignore clicks on a city pin (dot or label) or inside the city details section
+    const isCityPinClick = event.target.closest('.city-pin');
     const isCityDetailsClick = cityDetailsRef.current && cityDetailsRef.current.contains(event.target);
 
-    if (!isCityLabelClick && !isCityDetailsClick) {
-      setIsHeroTextVisible(true);
-      setIsGlobeRotating(true);
-      setShowCityDetails(false);
-      setSelectedCity(null);
-      setPointsData(pointsData.map(city => ({ ...city, isExpanded: false })));
+    if (!isCityPinClick && !isCityDetailsClick) {
+      resetView();
     }
   };
+
+  // Escape closes the city details and returns to the overview.
+  useEffect(() => {
+    const onKeyDown = (e) => {
+      if (e.key === 'Escape' && showCityDetails) resetView();
+    };
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [showCityDetails, resetView]);
 
   return (
     <div className="main-page-layout" onClick={handlePageClick}>
@@ -121,6 +148,7 @@ Moving to MING Labs, a bespoke design agency, I navigated a diverse landscape ra
           pointsData={pointsData}
           handleCityClick={handleCityClick}
           isGlobeRotating={isGlobeRotating}
+          reducedMotion={reducedMotion}
         />
       </div>
       <div className={`hero-section ${isHeroTextVisible ? '' : 'fade-out'}`}>
@@ -136,6 +164,11 @@ Moving to MING Labs, a bespoke design agency, I navigated a diverse landscape ra
           <div className="city-details-description">
             {selectedCity['description-long']}
           </div>
+          {selectedCity['description-attribution'] && (
+            <div className="city-details-description city-details-attribution">
+              {selectedCity['description-attribution']}
+            </div>
+          )}
         </div>
       )}
     </div>
