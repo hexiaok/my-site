@@ -1,8 +1,6 @@
 # This is Jian He
 
-A personal portfolio site built around an interactive 3D globe. Each
-city pin marks a stop in Jian He's career/journey; clicking one flies
-the camera in and shows the story for that stop.
+A personal portfolio site built around an interactive 3D globe.
 
 ## Stack
 
